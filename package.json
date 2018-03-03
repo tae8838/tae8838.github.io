@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-test-2",
+  "name": "tae8838",
   "version": "1.0.0",
   "description": "Nuxt.js project",
   "author": "Noppakun Wongsrinoppakun <tae8838@gmail.com>",
@@ -16,6 +16,7 @@
     "deploy": "push-dir --dir=dist --branch=master --cleanup"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.1",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {

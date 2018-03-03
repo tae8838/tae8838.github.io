@@ -1,9 +1,12 @@
 <template>
   <section class="container">
+    <nav-bar/>
+
     <div>
       <app-logo/>
+
       <h1 class="title">
-        nuxt-test-2
+        tae8838
       </h1>
       <h2 class="subtitle">
         Nuxt.js project
@@ -18,16 +21,20 @@
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
+
     </div>
+
   </section>
 </template>
 
 <script>
 import AppLogo from '~/components/AppLogo.vue'
+import NavBar from '~/components/NavBar.vue'
 
 export default {
   components: {
-    AppLogo
+    AppLogo,
+    NavBar
   }
 }
 </script>

@@ -5,11 +5,14 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
 } : {}
 
 module.exports = {
+  modules: [
+    'bootstrap-vue/nuxt',
+  ],
   /*
   ** Headers of the page
   */
   head: {
-    title: 'nuxt-test-2',
+    title: 'tae8838',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

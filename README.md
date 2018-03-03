@@ -1,4 +1,4 @@
-# nuxt-test-2
+# tae8838.github.io
 
 > Nuxt.js project
 
