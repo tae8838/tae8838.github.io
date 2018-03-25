@@ -1,26 +1,13 @@
 <template>
   <section class="container">
-    <nav-bar/>
-
     <div>
-      <app-logo/>
-
+    <nav-bar/>
       <h1 class="title">
         tae8838
       </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
+      <app-logo/>
+
+      <span>{{msg}}</span>
 
     </div>
 
@@ -30,19 +17,24 @@
 <script>
 import AppLogo from '~/components/AppLogo.vue'
 import NavBar from '~/components/NavBar.vue'
+import Projects from '~/components/Projects.vue'
+import Links from '~/components/Links.vue'
 
 export default {
   components: {
     AppLogo,
     NavBar
+  },
+  data() {
+    return {
+      msg: '<links/>'
+    }
   }
 }
 </script>
 
 <style>
 .container {
-  min-height: 100vh;
-  display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
