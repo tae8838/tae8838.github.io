@@ -1,15 +1,21 @@
 <template>
   <div>
     <intro></intro>
+    <main-content></main-content>
+    <footer></footer>
   </div>
 </template>
 
 <script>
 import Intro from './Intro.vue'
+import MainContent from './MainContent.vue'
+import Footer from './Footer.vue'
 
 export default {
   components: {
-    Intro
+    Intro,
+    MainContent,
+    Footer
   },
   name: 'HelloWorld',
   data () {
