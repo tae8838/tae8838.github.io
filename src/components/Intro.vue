@@ -1,16 +1,18 @@
 <template>
-  <div class="intro" @mouseover="handleHover" @mouseleave="handleMouseleave">
-    <h1 :style="titleStyle" v-text="titleText" v-if="hoverDuration < 100"></h1>
-    <img class="img-fluid" v-if="hoverDuration > 100 && hoverDuration < 150" src="http://www.humorandmemes.com/wp-content/uploads/2017/07/whos-awesome-youre-awesome.jpg">
-    <h1 :style="titleStyle" v-if="hoverDuration > 150 && hoverDuration < 200" style="font-size: 40px">Nah that's it. Really. You can stop hovering over this area now.</h1>
-    <h1 :style="titleStyle" v-if="hoverDuration > 200" style="font-size: 40px">I'm impressed! If you are this bored, check my <a @click="triggerLinkTextChange" href="#" v-text="linkText"></a> Thanks for visiting! :)</h1>
+  <div class="intro">
+    <div class="intro-text">
+      <h3>Tae Noppakun Wongsrinoppakun</h3>
+    </div>
+    <div class="intro-img-wrapper">
+      <img class="img-fluid intro-img" src="https://c1.staticflickr.com/2/1929/31036351628_b5ca3999eb_k.jpg">
+    </div>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      hoverDuration: 0,
+      hovering: false,
       someText: 'hi',
       interval: null,
       linkText: 'game out here!'
@@ -22,33 +24,16 @@ export default {
     },
     titleText () {
       if (this.hoverDuration < 10) {
-        return 'Tae Noppakun Wongsrinoppakun'
-      }
-      else if (this.hoverDuration < 30) {
-        return 'No this is not a bug'
-      }
-      else if (this.hoverDuration < 70) {
-        return 'This is intentional'
-      }
-      else if (this.hoverDuration < 100) {
-        return 'Still here' + ' ?'.repeat((this.hoverDuration - 60) / 3)
-      }
-      else {
-        return 'hehe'
+        return
       }
     }
   },
   methods: {
     handleMouseleave () {
-      clearInterval(this.interval)
-      this.interval  = null
-      this.linkText = 'game out here!'
-      this.hoverDuration = 0
+      this.hovering = false
     },
     handleHover () {
-      if (this.hoverDuration === 0 && this.interval === null) {
-        this.interval = setInterval(this.incrementDuration, 10)
-      }
+      this.hovering = true
     },
     incrementDuration () {
       this.hoverDuration += 0.1
@@ -59,14 +44,62 @@ export default {
   }
 }
 </script>
-<style>
-.intro {
+<style lang="scss">
+@media screen and (min-width: 1000px) {
+  .intro-text h3 {
+    font-size: 80px;
+  }
+}
+@media screen and (min-width: 700px) {
+  .intro-text h3 {
+    font-size: 50px;
+  }
+}
+@import url(//fonts.googleapis.com/css?family=Indie+Flower);
+
+.intro-text h3 {
   background-color: white;
   display: inline-flex;
   overflow: hidden;
+  position: absolute;
+  background: none;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  top: 10px;
+  color:white;
+  font-family: 'Indie Flower';
 }
 
-.intro h1:hover {
-  cursor: pointer;
+.intro{
+  width:100%; /*container-width*/
+  overflow:hidden; /*hide bounds of image */
+  margin:0;   /*reset margin of .intro tag*/
+}
+.intro img{
+  display:block; /*remove inline-block spaces*/
+  width:100%; /*make image streatch*/
+  filter: alpha(opacity=40); /* msie */
+  background-color:black;
+  opacity: 0.7;
+}
+
+.intro-img-wrapper {
+  opacity: 1;
+  filter: alpha(opacity=40); /* msie */
+  background-color: #000;
+}
+
+.intro-text:hover h3{
+    animation: color-change 1s infinite;
+}
+@keyframes color-change {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    56% { color: blue; }
+    70% { color: indigo; }
+    84% { color: violet; }
 }
 </style>
