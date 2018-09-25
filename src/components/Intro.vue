@@ -1,9 +1,9 @@
 <template>
-  <div :style="titleStyle" class="intro" @mouseover="handleHover" @mouseleave="handleMouseleave">
-    <h1 v-text="titleText" v-if="hoverDuration < 100"></h1>
-    <img v-if="hoverDuration > 100 && hoverDuration < 150" src="http://www.humorandmemes.com/wp-content/uploads/2017/07/whos-awesome-youre-awesome.jpg">
-    <h1 v-if="hoverDuration > 150 && hoverDuration < 200" style="font-size: 40px">Nah that's it. Really. You can stop hovering over this area now.</h1>
-    <h1 v-if="hoverDuration > 200" style="font-size: 40px">I'm impressed! If you are this bored, check my <a @click="triggerLinkTextChange" href="#" v-text="linkText"></a> Thanks for visiting! :)</h1>
+  <div class="intro" @mouseover="handleHover" @mouseleave="handleMouseleave">
+    <h1 :style="titleStyle" v-text="titleText" v-if="hoverDuration < 100"></h1>
+    <img class="img-fluid" v-if="hoverDuration > 100 && hoverDuration < 150" src="http://www.humorandmemes.com/wp-content/uploads/2017/07/whos-awesome-youre-awesome.jpg">
+    <h1 :style="titleStyle" v-if="hoverDuration > 150 && hoverDuration < 200" style="font-size: 40px">Nah that's it. Really. You can stop hovering over this area now.</h1>
+    <h1 :style="titleStyle" v-if="hoverDuration > 200" style="font-size: 40px">I'm impressed! If you are this bored, check my <a @click="triggerLinkTextChange" href="#" v-text="linkText"></a> Thanks for visiting! :)</h1>
   </div>
 </template>
 <script>
@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     titleStyle () {
-      return 'font-size:' + (this.hoverDuration + 10) + 'px'
+      return 'font-size:' + (this.hoverDuration + 20) + 'px'
     },
     titleText () {
       if (this.hoverDuration < 10) {
