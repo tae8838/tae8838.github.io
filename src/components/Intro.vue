@@ -1,7 +1,7 @@
 <template>
   <div class="intro">
     <div class="intro-text">
-      <h3>Tae Noppakun Wongsrinoppakun</h3>
+      <h3 style="height: 130px;">Tae Noppakun Wongsrinoppakun</h3>
     </div>
     <div class="intro-img-wrapper">
       <img class="img-fluid intro-img" src="https://c1.staticflickr.com/2/1929/31036351628_b5ca3999eb_k.jpg">

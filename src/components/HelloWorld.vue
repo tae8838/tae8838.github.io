@@ -2,20 +2,20 @@
   <div>
     <intro></intro>
     <main-content></main-content>
-    <footer></footer>
+    <footer-content></footer-content>
   </div>
 </template>
 
 <script>
 import Intro from './Intro.vue'
 import MainContent from './MainContent.vue'
-import Footer from './Footer.vue'
+import FooterContent from './FooterContent.vue'
 
 export default {
   components: {
     Intro,
     MainContent,
-    Footer
+    FooterContent
   },
   name: 'HelloWorld',
   data () {
