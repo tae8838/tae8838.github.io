@@ -1,12 +1,27 @@
 <template>
   <div class='main-content'>
-    <h1 @mouseover="changeName">So who is <span class='name' v-text="name"></span></h1>
+    <h1 class='who-is' data-aos='fade-up' @mouseover="changeName">Who is <span class='name' v-text="name"></span></h1>
     <div class='content'>
-      <h4>Present</h4><li>A full-stack engineer for a start up in Tokyo! Working with mainly <a href="https://vuejs.org/" target="_blank">Vue.js</a> and <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a>.</li>
-      <h4>2016 - 2018</h4><li>A Ruby on Rails developer at a company in Boston working remotely. While at it, I lived to Brazil, the United States, Indonesia, Australia, Taiwan, Hong Kong, Singapore and Srilanka.</li>
-      <h4>2013 - 2015</h4><li>Went to University of Melbourne. Was Vice president of <a href="https://cissa.org.au/" target="_blank">Computer and Information System Student Association (CISSA)</a></li>
-      <h4>2008 - 2012</h4><li>Went Singapore for highschool.</li>
-      <h4>1995</h4><li>Popped out into the land of smile! <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/th.svg" alt="Thailand Flag"></li>
+      <div class='black'>
+        <h4>Present</h4>
+        <li data-aos="fade-right">A full-stack engineer at a start up in Tokyo! Working mainly with <a href="https://vuejs.org/" target="_blank">Vue.js</a> and <a href="https://rubyonrails.org/" target="_blank">Ruby on Rails</a>.</li>
+      </div>
+      <div class='white'>
+        <h4>2016 - 2018</h4>
+          <li data-aos="fade-left">A Ruby on Rails developer at a company in Boston. I was working remotely while spending my time in Brazil, the United States, Indonesia, Australia, Taiwan, Hong Kong, Singapore and Srilanka.</li>
+      </div>
+      <div class='black'>
+        <h4>2013 - 2015</h4>
+        <li data-aos="fade-right">Went to the University of Melbourne. Was Vice president of <a href="https://cissa.org.au/" target="_blank">Computer and Information System Student Association (CISSA)</a></li>
+      </div>
+      <div class='white'>
+        <h4>2008 - 2012</h4>
+        <li data-aos="fade-left">Went to Singapore for highschool.</li>
+      </div>
+      <div class='black'>
+        <h4>1995</h4>
+        <p data-aos="fade-right">Popped out into the land of smile! <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/th.svg" alt="Thailand Flag"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +38,11 @@
       changeName () {
         this.name = 'Tae Noppakun Wongsrinoppakun??'
       }
+    },
+    mounted() {
+      AOS.init({
+        duration: 1200,
+      })
     }
   }
 </script>
@@ -47,6 +67,8 @@
 .main-content {
   margin: 30px;
   font-family: 'Indie Flower';
+  margin-bottom: 100px;
+  overflow: hidden;
 }
 
 .name {
@@ -57,18 +79,72 @@
 }
 
 .content {
-  margin: 0 100px;
+  margin: 0 20px;
   text-align: left;
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
   h4 {
     margin-top: 30px;
   }
 }
+
+@media screen and (min-width: 1000px) {
+  .content {
+    h4, li {
+      margin: 30px 100px;
+    }
+  }
+}
+@media screen and (min-width: 700px) {
+  .content {
+    h4, li {
+      margin: 30px 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .black {
+    h4 {
+      font-size: 50px;
+    }
+  }
+  .white {
+    h4 {
+      font-size: 50px;
+    }
+  }
+}
+
 .flag {
   width: 30px;
 }
 
 .name:hover span:after{
   content: 'Tae Noppakun Wongsrinoppakun';
+}
+.content {
+  text-align: center;
+}
+
+li {
+  list-style: none;
+}
+
+.black {
+  padding: 20px;
+  color: white;
+  background-color: #414141;
+}
+
+.white {
+  padding: 20px;
+}
+
+.row {
+  min-height: 180px;
+}
+
+.who-is {
+  margin-bottom: 50px;
 }
 </style>

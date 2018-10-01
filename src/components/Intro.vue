@@ -1,10 +1,10 @@
 <template>
   <div class="intro">
     <div class="intro-text">
-      <h3 style="height: 130px;">Tae Noppakun Wongsrinoppakun</h3>
+      <h3 style="height: 130px;" data-aos='fade-up'>Tae Noppakun Wongsrinoppakun</h3>
     </div>
     <div class="intro-img-wrapper">
-      <img class="img-fluid intro-img" src="https://c1.staticflickr.com/2/1929/31036351628_b5ca3999eb_k.jpg">
+      <img class="img-fluid intro-img" src="https://c1.staticflickr.com/2/1931/44950736571_832d14cd44_k.jpg">
     </div>
   </div>
 </template>
@@ -18,57 +18,32 @@ export default {
       linkText: 'game out here!'
     }
   },
-  computed: {
-    titleStyle () {
-      return 'font-size:' + (this.hoverDuration + 20) + 'px'
-    },
-    titleText () {
-      if (this.hoverDuration < 10) {
-        return
-      }
-    }
-  },
   methods: {
     handleMouseleave () {
       this.hovering = false
     },
     handleHover () {
       this.hovering = true
-    },
-    incrementDuration () {
-      this.hoverDuration += 0.1
-    },
-    triggerLinkTextChange () {
-      this.linkText = 'Okay, its not actually done yet. Stay tuned!'
     }
   }
 }
 </script>
 <style lang="scss">
-@media screen and (min-width: 1000px) {
-  .intro-text h3 {
-    font-size: 80px;
-  }
-}
-@media screen and (min-width: 700px) {
-  .intro-text h3 {
-    font-size: 50px;
-  }
-}
 @import url(//fonts.googleapis.com/css?family=Indie+Flower);
 
 .intro-text h3 {
   background-color: white;
   display: inline-flex;
-  overflow: hidden;
   position: absolute;
   background: none;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10%;
+  transform: translateX(-10%);
   z-index: 1;
-  top: 10px;
+  top: 30px;
   color:white;
   font-family: 'Indie Flower';
+  width: 40px;
+  font-size: 25px;
 }
 
 .intro{
@@ -101,5 +76,15 @@ export default {
     56% { color: blue; }
     70% { color: indigo; }
     84% { color: violet; }
+}
+@media screen and (min-width: 580px) {
+  .intro-text h3 {
+    font-size: 40px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .intro-text h3 {
+    font-size: 60px;
+  }
 }
 </style>
