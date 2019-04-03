@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div @click="dicisionMakerRedirect">
     <intro></intro>
     <main-content></main-content>
+    <projects></projects>
     <footer-content></footer-content>
   </div>
 </template>
@@ -9,18 +10,25 @@
 <script>
 import Intro from './Intro.vue'
 import MainContent from './MainContent.vue'
+import Projects from './Projects.vue'
 import FooterContent from './FooterContent.vue'
 
 export default {
   components: {
     Intro,
     MainContent,
-    FooterContent
+    FooterContent,
+    Projects
   },
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    dicisionMakerRedirect () {
+      window.location.href = '/#/decision-maker'
     }
   }
 }

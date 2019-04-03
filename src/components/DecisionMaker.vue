@@ -1,10 +1,13 @@
 <template>
   <div class=''>
+    <div @click="backHome" class='header'>
+      Tae
+    </div>
   	<h1>Decision Maker</h1>
     <transition name="fade" mode="out-in">
       <div v-if="result.length === 0">
         <button class='decide button' @click='decide'>Decide</button><br>
-        <input @keyup.enter="add" type='text' v-model="option"> <button class='add button' @click='add'>Add</button>
+        <input @keyup.enter="add" type='text' v-model="option"> <button class='add button' @click='add'>Add option</button>
         <p v-if="options.length > 0">Your options:</p>
         <transition-group name="fade" mode="out-in">
           <p class='option' v-for="opt in options" :key="opt">
@@ -42,6 +45,9 @@
         this.result = ''
         this.option = ''
         this.options = []
+      },
+      backHome () {
+        window.location.href = '/'
       }
     }
 	}
@@ -49,6 +55,13 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.header {
+  background-color: black;
+  color: white;
+  width: 100%;
+  height: 20px;
+  cursor: pointer;
+}
 .button {
   margin: 10px;
   padding: 12px 12px;
