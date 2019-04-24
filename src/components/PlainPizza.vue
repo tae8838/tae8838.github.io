@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="item" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
+      <h1 class="item jet" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
         jet-game
       </h1>
       <h1 class="item" v-show="showBullet" :style="{ top: bulletYPosition + 'px', left: bulletXPosition + 'px'}">
@@ -17,8 +17,8 @@ export default {
     return {
       xPosition: 0,
       yPosition: 0,
-      xVelocity: 0,
-      yVelocity: 0,
+      xVelocity: 0.1,
+      yVelocity: 0.1,
       keyMap: {},
       gameOver: false,
       rotateDeg: 0,
@@ -51,19 +51,19 @@ export default {
       this.yPosition = this.yPosition + this.yVelocity
       if (this.xPosition < 0) {
         this.xPosition = 0
-        this.xVelocity = 0
+        this.xVelocity = this.xVelocity * -1
       }
       if (this.xPosition > this.window.width) {
         this.xPosition = this.window.width
-        this.xVelocity = 0
+        this.xVelocity = this.xVelocity * -1
       }
       if (this.yPosition < 0) {
         this.yPosition = 0
-        this.yVelocity = 0
+        this.yVelocity = this.yVelocity * -1
       }
       if (this.yPosition > this.window.height) {
         this.yPosition = this.window.height
-        this.yVelocity = 0
+        this.yVelocity = this.yVelocity * -1
       }
     },
     updateVelocity () {
@@ -123,8 +123,8 @@ export default {
       }, 16);
     },
     handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
+      this.window.width = window.innerWidth - 30;
+      this.window.height = window.innerHeight - 30;
     }
   },
   created () {
@@ -142,5 +142,9 @@ export default {
 
 .item {
   position: absolute;
+}
+
+.jet {
+  width: 200px;
 }
 </style>
