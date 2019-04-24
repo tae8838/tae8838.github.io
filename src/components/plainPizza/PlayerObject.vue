@@ -1,5 +1,5 @@
 <template>
-  <base-object></base-object>
+  <base-object :name="name" :position="position"></base-object>
 </template>
 <script>
 import BaseObject from 'BaseObject.vue'
