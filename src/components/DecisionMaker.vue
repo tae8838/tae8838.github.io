@@ -4,6 +4,7 @@
       Tae
     </div>
   	<h1>Decision Maker</h1>
+    <p class='small'>This application takes in your input options and chooses one at random. Perfect for those to have a hard time deciding things!</p>
     <transition name="fade" mode="out-in">
       <div v-if="result.length === 0">
         <button class='decide button' @click='decide'>Decide</button><br>
@@ -55,6 +56,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.class {
+  font-size: 5px;
+}
 .header {
   background-color: black;
   color: white;
