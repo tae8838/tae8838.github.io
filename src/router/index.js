@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import DecisionMaker from '@/components/DecisionMaker'
 import PlainPizza from '@/components/PlainPizza'
+import GameObject from '@/components/plainPizza/GameObject'
 
 Vue.use(Router)
 
@@ -22,7 +23,7 @@ export default new Router({
     {
       path: '/unfinished-game',
       name: 'Unfinished Game',
-      component: PlainPizza
+      component: GameObject
     }
     // {
     //   path: '/plain-pizza',

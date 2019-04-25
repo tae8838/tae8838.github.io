@@ -1,18 +1,32 @@
 <template>
-  {{ name }}
+  <div class='game-object' :style="{ top: positionY + 'px', left: positionX + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
+    {{ objectName }}
+  </div>
 </template>
 <script>
 export default {
   props: {
-    name: {
+    objectName: {
       type: String,
       required: true
     },
-    position: {
-      type: Object,
+    positionX: {
+      type: Number,
       required: true
+    },
+    positionY: {
+      type: Number,
+      required: true
+    },
+    rotateDeg: {
+      type: Number,
+      default: 0
     }
   }
 }
 </script>
-<style></style>
+<style>
+  .game-object {
+    position: absolute;
+  }
+</style>
