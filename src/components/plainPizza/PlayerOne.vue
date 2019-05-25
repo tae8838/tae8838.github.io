@@ -36,6 +36,7 @@ export default {
     }
   },
   methods: {
+    //32 to shoot
     updateVelocity () {
       if(this.keyMap[37]) {
         this.velocity.x = this.velocity.x - 0.1
@@ -52,6 +53,7 @@ export default {
     },
     update () {
       this.$refs.playerObject.update()
+      this.updateVelocity()
     }
   }
 }

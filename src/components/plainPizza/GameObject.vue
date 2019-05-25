@@ -2,6 +2,7 @@
   <section class="container">
     <div>
       <player-one ref='playerOne' :key-map="keyMap"></player-one>
+      <player-two ref='playerTwo' :key-map="keyMap"></player-two>
       <!-- <h1 class="item jet" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
         jet-game
       </h1>
@@ -14,11 +15,12 @@
 
 <script>
 import PlayerOne from './PlayerOne.vue'
-// import PlayerTwo from './PlayerTwo.vue'
+import PlayerTwo from './PlayerTwo.vue'
 
 export default {
   components: {
-    PlayerOne
+    PlayerOne,
+    PlayerTwo
   },
   data () {
     return {
@@ -101,6 +103,8 @@ export default {
       let that = this
       setTimeout(function () {
         that.$refs.playerOne.update()
+        that.$refs.playerTwo.update()
+        that.handleInputs()
         // that.updateVelocity()
         // that.updatePostion()
         // that.updateRotationDeg()
@@ -114,6 +118,7 @@ export default {
       this.window.height = window.innerHeight - 30;
     },
     handleInputs () {
+      let that = this
       window.addEventListener('keyup', function(e) {
         that.keyMap[e.keyCode] = e.type != 'keyup'
       })

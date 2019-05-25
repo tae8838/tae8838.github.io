@@ -1,5 +1,5 @@
 <template>
-  <base-object :objectName="jetName" :position-x="position.x" :position-y="position.y"></base-object>
+  <base-object :objectName="jetName" :position-x="position.x" :position-y="position.y" :rotate-deg="rotateDeg"></base-object>
 </template>
 <script>
 import BaseObject from './BaseObject.vue'
@@ -31,7 +31,8 @@ export default {
       position: {
         x: 0,
         y: 0
-      }
+      },
+      rotateDeg: 0
     }
   },
   methods: {
@@ -62,7 +63,6 @@ export default {
       this.rotateDeg = Math.atan(this.velocity.y / this.velocity.x) * 180 / Math.PI
     },
     update () {
-      this.$emit('updateVelocity')
       this.updatePostion()
       this.updateRotationDeg()
     }
