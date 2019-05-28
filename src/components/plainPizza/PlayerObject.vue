@@ -80,16 +80,21 @@ export default {
       // }
     },
     updateVelocity () {
+      let change
       if(this.keyMap[this.control.left]) {
-        this.velocity.x = this.velocity.x - 0.1
+        change = this.velocity.x > 0 ? 0.2 : 0.1
+        this.velocity.x = this.velocity.x - change
       }
       if(this.keyMap[this.control.right]) {
-         this.velocity.x = this.velocity.x + 0.1
+        change = this.velocity.x > 0 ? 0.1 : 0.2
+        this.velocity.x = this.velocity.x + change
       }
       if(this.keyMap[this.control.up]) {
+        change = this.velocity.y > 0 ? 0.2 : 0.1
         this.velocity.y = this.velocity.y - 0.1
       }
       if(this.keyMap[this.control.down]) {
+        change = this.velocity.y > 0 ? 0.2 : 0.1
         this.velocity.y = this.velocity.y + 0.1
       }
     },
