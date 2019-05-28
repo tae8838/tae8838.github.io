@@ -21,8 +21,8 @@ export default new Router({
       component: DecisionMaker
     },
     {
-      path: '/unfinished-game',
-      name: 'Unfinished Game',
+      path: '/jet-game',
+      name: 'Jet Game',
       component: GameObject
     }
     // {
