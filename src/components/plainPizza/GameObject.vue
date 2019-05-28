@@ -190,10 +190,6 @@ export default {
 .container {
 }
 
-.item {
-  position: absolute;
-}
-
 .jet {
   width: 200px;
 }
