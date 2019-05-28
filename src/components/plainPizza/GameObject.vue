@@ -1,14 +1,35 @@
 <template>
   <section class="container">
     <div>
-      <player-one ref='playerOne' :key-map="keyMap"></player-one>
-      <player-two ref='playerTwo' :key-map="keyMap"></player-two>
-      <!-- <h1 class="item jet" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
-        jet-game
-      </h1>
-      <h1 class="item" v-show="showBullet" :style="{ top: bulletYPosition + 'px', left: bulletXPosition + 'px'}">
-        B
-      </h1> -->
+      <div v-if="lastGameLog">
+        <p>{{lastGameLog}} {{deathDetail}}</p>
+        <p>player one score: {{ p1Score }}</p>
+        <p>player two score: {{ p2Score }}</p>
+      </div>
+      <div v-else>
+        <p>p1 control: arrowkeys + spacebar</p>
+        <p>p2 control: wasd + shift</p>
+      </div>
+      <player-object
+        :key-map="keyMap"
+        ref='playerOne'
+        jet-name="JET1"
+        :initial-position="playerOneInitialPosition"
+        :initialVelocity="playerOneInitialVelocity"
+        :control="playerOneControl"
+        @lost="playerOneOutOfBound"
+        v-if="showPlayer1">
+      </player-object>
+      <player-object
+        :key-map="keyMap"
+        ref='playerTwo'
+        jet-name="JET2"
+        :initial-position="playerTwoInitialPosition"
+        :initialVelocity="playerTwoInitialVelocity"
+        :control="playerTwoControl"
+        @lost="playerTwoOutOfBound"
+        v-if="showPlayer2">
+      </player-object>
     </div>
   </section>
 </template>
@@ -16,11 +37,13 @@
 <script>
 import PlayerOne from './PlayerOne.vue'
 import PlayerTwo from './PlayerTwo.vue'
+import PlayerObject from './PlayerObject.vue'
 
 export default {
   components: {
     PlayerOne,
-    PlayerTwo
+    PlayerTwo,
+    PlayerObject
   },
   data () {
     return {
@@ -36,10 +59,46 @@ export default {
       bulletXPosition: 0,
       bulletXVelocity: 0,
       bulletYVelocity: 0,
+      showPlayer1: true,
+      showPlayer2: true,
       window: {
         width: 0,
         height: 0
-      }
+      },
+      playerOneControl: {
+        up: 38,
+        down: 40,
+        left: 37,
+        right: 39,
+        shoot: 32
+      },
+      playerTwoControl: {
+        up: 87,
+        down: 83,
+        left: 65,
+        right: 68,
+        shoot: 16
+      },
+      playerOneInitialVelocity: {
+        x: 1,
+        y: 1
+      },
+      playerTwoInitialVelocity: {
+        x: -1,
+        y: -1
+      },
+      playerOneInitialPosition: {
+        x: 0,
+        y: 0
+      },
+      playerTwoInitialPosition: {
+        x: window.screen.width - 200,
+        y: window.screen.height - 200
+      },
+      p1Score: 0,
+      p2Score: 0,
+      deathDetail: '',
+      lastGameLog: ''
     }
   },
   methods: {
@@ -55,62 +114,14 @@ export default {
       this.handleResize()
       this.gameLoop()
     },
-
-  //   updateVelocity () {
-  //     if(this.keyMap[37]) {
-  //       this.xVelocity = this.xVelocity - 0.1
-  //     }
-  //     if(this.keyMap[39]) {
-  //        this.xVelocity = this.xVelocity + 0.1
-  //     }
-  //     if(this.keyMap[38]) {
-  //       this.yVelocity = this.yVelocity - 0.1
-  //     }
-  //     if(this.keyMap[40]) {
-  //       this.yVelocity = this.yVelocity + 0.1
-  //     }
-  //   },
-  //   initBullet () {
-  //     if (!this.showBullet) {
-  //       this.showBullet = true
-  //       this.bulletXPosition = this.xPosition
-  //       this.bulletYPosition = this.yPosition
-  //       this.bulletXVelocity = this.xVelocity
-  //       this.bulletYVelocity = this.yVelocity
-  //     }
-  //   },
-  //   updateBulletPosition () {
-  //     if (this.keyMap[32]) {
-  //       this.initBullet()
-  //     }
-  //     if (this.showBullet) {
-  //       this.bulletXPosition =  this.bulletXPosition + (this.bulletXVelocity + 1) * 1.5
-  //       this.bulletYPosition = this.bulletYPosition + (this.bulletYVelocity + 1) * 1.5
-  //     }
-  //     if (this.bulletXPosition < 0
-  //       || this.bulletXPosition > this.window.width
-  //       || this.bulletYPosition < 0
-  //       || this.bulletYPosition > this.window.height) {
-  //       this.bulletXPosition = 0
-  //       this.bulletXVelocity = 0
-  //       this.bulletYPosition = 0
-  //       this.bulletYVelocity = 0
-  //       this.showBullet = false
-  //     }
-  //   },
-
     gameLoop() {
       let that = this
       setTimeout(function () {
         that.$refs.playerOne.update()
         that.$refs.playerTwo.update()
         that.handleInputs()
-        // that.updateVelocity()
-        // that.updatePostion()
-        // that.updateRotationDeg()
-        // that.updateBulletPosition()
-
         that.gameLoop()
+        that.detectObjectsCollision()
       }, 16);
     },
     handleResize() {
@@ -125,14 +136,57 @@ export default {
       window.addEventListener('keydown', function(e) {
         that.keyMap[e.keyCode] = e.type == 'keydown'
       })
+    },
+    playerOneOutOfBound() {
+      this.deathDetail = 'Player One jet crashed on the side of the screen.'
+      this.playerOneLost()
+    },
+    playerTwoOutOfBound() {
+      this.deathDetail = 'Player Two jet crashed on the side of the screen.'
+      this.playerTwoLost()
+    },
+    playerOneLost () {
+      this.lastGameLog = 'Player Two Won!!!'
+      this.p2Score = this.p2Score + 1
+      this.resetGame()
+    },
+    playerTwoLost () {
+      this.lastGameLog = 'Player One Won!!!'
+      this.p1Score = this.p1Score + 1
+      this.resetGame()
+    },
+    resetGame () {
+      this.$refs.playerOne.reset()
+      this.$refs.playerTwo.reset()
+    },
+    detectCollision (object1, object2) {
+      if (Math.abs(object1.x - object2.x) < 15 && Math.abs(object1.y - object2.y) < 15) {
+        return true
+      }
+      return false
+    },
+    detectObjectsCollision () {
+      if (this.detectCollision(this.$refs.playerOne.position, this.$refs.playerTwo.position)) {
+        this.lastGameLog = 'Players collided with one another.'
+        this.resetGame()
+      }
+      if (this.$refs.playerOne.$refs.bullet) {
+        if (this.detectCollision(this.$refs.playerOne.$refs.bullet.position, this.$refs.playerTwo.position)) {
+          this.deathDetail = 'Player Two got shot.'
+          this.playerTwoLost()
+        }
+      }
+      if (this.$refs.playerTwo.$refs.bullet) {
+        if (this.detectCollision(this.$refs.playerTwo.$refs.bullet.position, this.$refs.playerOne.position)) {
+          this.deathDetail = 'Player Two got shot.'
+          this.playerOneLost()
+        }
+      }
     }
   },
   created () {
     this.startGame()
-  },
-  // destroyed() {
-  //   window.removeEventListener('resize', this.handleResize)
-  // }
+  }
 }
 </script>
 
