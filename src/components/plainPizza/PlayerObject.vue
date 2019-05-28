@@ -112,7 +112,7 @@ export default {
       if (this.position.x < 0
         || this.position.x > window.screen.width
         || this.position.y < 0
-        || this.position.y > window.screen.height) {
+        || this.position.y > window.screen.height - 50) {
         this.$emit('lost')
       }
     },

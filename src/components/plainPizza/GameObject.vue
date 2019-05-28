@@ -2,13 +2,13 @@
   <section class="container">
     <div>
       <div v-if="lastGameLog">
-        <p>{{lastGameLog}} {{deathDetail}}</p>
+        <h3>{{lastGameLog}} {{deathDetail}}</h3>
         <p>player one score: {{ p1Score }}</p>
         <p>player two score: {{ p2Score }}</p>
       </div>
       <div v-else>
-        <p>p1 control: arrowkeys + spacebar</p>
-        <p>p2 control: wasd + shift</p>
+        <p>JET1 control: arrowkeys + spacebar</p>
+        <p>JET2 control: wasd + shift</p>
       </div>
       <player-object
         :key-map="keyMap"
@@ -35,14 +35,10 @@
 </template>
 
 <script>
-import PlayerOne from './PlayerOne.vue'
-import PlayerTwo from './PlayerTwo.vue'
 import PlayerObject from './PlayerObject.vue'
 
 export default {
   components: {
-    PlayerOne,
-    PlayerTwo,
     PlayerObject
   },
   data () {
@@ -88,8 +84,8 @@ export default {
         y: -1
       },
       playerOneInitialPosition: {
-        x: 0,
-        y: 0
+        x: 50,
+        y: 50
       },
       playerTwoInitialPosition: {
         x: window.screen.width - 200,
@@ -125,8 +121,8 @@ export default {
       }, 16);
     },
     handleResize() {
-      this.window.width = window.innerWidth - 30;
-      this.window.height = window.innerHeight - 30;
+      this.window.width = window.innerWidth - 50;
+      this.window.height = window.innerHeight - 50;
     },
     handleInputs () {
       let that = this
@@ -160,7 +156,7 @@ export default {
       this.$refs.playerTwo.reset()
     },
     detectCollision (object1, object2) {
-      if (Math.abs(object1.x - object2.x) < 15 && Math.abs(object1.y - object2.y) < 15) {
+      if (Math.abs(object1.x - object2.x) < 25 && Math.abs(object1.y - object2.y) < 25) {
         return true
       }
       return false

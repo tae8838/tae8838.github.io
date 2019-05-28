@@ -24,7 +24,7 @@ export default {
   },
   data () {
     return {
-      speed: 10,
+      speed: 40,
       rotateDeg: 0,
       position: {
         x: this.initialPosition.x,
@@ -47,9 +47,9 @@ export default {
     },
     boundaryCheck () {
       if (this.position.x < 0
-        || this.position.x > window.screen.width
+        || this.position.x > window.screen.width - 50
         || this.position.y < 0
-        || this.position.y > window.screen.height) {
+        || this.position.y > window.screen.height - 50) {
         this.$emit('destroy-bullet')
       }
     },
