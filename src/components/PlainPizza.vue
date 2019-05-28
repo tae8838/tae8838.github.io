@@ -1,10 +1,10 @@
 <template>
   <section class="container">
     <div>
-      <h1 class="item jet" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
+      <h1 class="game-item jet" :style="{ top: yPosition + 'px', left: xPosition + 'px', transform: 'rotate(' + rotateDeg + 'deg)'}">
         jet-game
       </h1>
-      <h1 class="item" v-show="showBullet" :style="{ top: bulletYPosition + 'px', left: bulletXPosition + 'px'}">
+      <h1 class="game-item" v-show="showBullet" :style="{ top: bulletYPosition + 'px', left: bulletXPosition + 'px'}">
         B
       </h1>
     </div>
@@ -140,7 +140,7 @@ export default {
 .container {
 }
 
-.item {
+.game-item {
   position: absolute;
 }
 
